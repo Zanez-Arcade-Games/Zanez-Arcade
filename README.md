@@ -1,2 +1,1 @@
-# Zanez-Arcade-Games
-The BEST Arcade
+# Zanez Arcade
