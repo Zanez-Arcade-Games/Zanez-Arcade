@@ -116,12 +116,25 @@
       color: #7dd3fc;
       font-size: 0.95rem;
       margin-bottom: 6px;
+      transition: opacity 0.3s ease;
     }
 
     .subtitle-secondary {
       color: #94a3b8;
       font-size: 0.9rem;
       margin-bottom: 35px;
+    }
+
+    /* Animation Keyframes */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-4px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* Counter Sections */
@@ -218,9 +231,13 @@
       });
     });
   </script>
-<script>
-  const quotes = [
-"Also Try Bloxcraft UBG!",
+
+  <script>
+    const quotes = [
+      "Also Try Bloxcraft UBG!",
+      "Bloxcraft UBG so tuff!",
+      "Play Bloxcraft UBG!",
+      "Also Try Bloxcraft UBG!",
   "zane say NO.",
   "HI BRAYLENNN!",
   "No, really, don't get up.",
@@ -233,23 +250,30 @@
   "roblox is ass.",
   "no gooning in class to jjk jayden.",
   "batman.",
-];
+    ];
 
-function displayRandomQuote() {
-const quoteElement = document.getElementById("test");
-const q = quotes[Math.floor(Math.random() * quotes.length)];
+    function displayRandomQuote() {
+      const quoteElement = document.getElementById("test");
+      if (!quoteElement) return;
 
-// Instantly hide the current text
-quoteElement.style.opacity = "0";
-quoteElement.style.animation = "none";
+      const q = quotes[Math.floor(Math.random() * quotes.length)];
 
-// Force browser to recognize the reset
-void quoteElement.offsetWidth;
+      // Reset style to restart keyframe animation
+      quoteElement.style.animation = "none";
 
-// Update text and restart fade animation
-quoteElement.innerHTML = q;
-quoteElement.style.animation = "fadeIn 1.2s ease forwards";
-}
-</script>
+      // Force browser reflow
+      void quoteElement.offsetWidth;
+
+      // Update text and apply animation
+      quoteElement.innerText = q;
+      quoteElement.style.animation = "fadeIn 1.2s ease forwards";
+    }
+
+    // Run on load and cycle quotes every 4 seconds
+    document.addEventListener("DOMContentLoaded", () => {
+      displayRandomQuote();
+      setInterval(displayRandomQuote, 4000);
+    });
+  </script>
 </body>
 </html>
